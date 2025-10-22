@@ -1,0 +1,29 @@
+name: "RTK Caster"
+version: "1.0.0"
+slug: "rtk_caster"
+description: "RTK Caster add-on for Home Assistant, based on ELT_RTKBase."
+arch:
+  - "aarch64"
+  - "armv7"
+init: true
+map:
+  - "config:rw"
+  - "ssl:ro"
+  - "addons:ro"
+  - "share:rw"
+  - "media:rw"
+boot: "auto"
+ingress: true
+ingress_port: 80
+ports:
+  "2101/tcp": 2101
+options:
+  gnss_ip: "192.168.1.248"
+  gnss_port: 5015
+  ntrip_port: 2101
+schema:
+  gnss_ip: "str"
+  gnss_port: "port"
+  ntrip_port: "port"
+image: "homeassistant/{arch}-addon-rtk_caster"
+url: "https://github.com/GNSSOEM/ELT_RTKBase"

@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bashio
+
+exec /usr/local/rtkbase/rtkbase/run_cast.sh
