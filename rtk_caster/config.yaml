@@ -26,5 +26,4 @@ schema:
   gnss_ip: "str"
   gnss_port: "port"
   ntrip_port: "port"
-image: "homeassistant/{arch}-addon-rtk_caster"
 url: "https://github.com/GNSSOEM/ELT_RTKBase"

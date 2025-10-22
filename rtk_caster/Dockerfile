@@ -47,10 +47,7 @@ RUN adduser -D -h ${RTKBASE_PATH} -s /sbin/nologin ${RTKBASE_USER} && \
     mkdir -p ${RTKBASE_PATH} && \
     chown -R ${RTKBASE_USER}:${RTKBASE_USER} ${RTKBASE_PATH} && \
     cd /${RTKBASE_PATH}/rtkbase/Install && \
-    sed -i 's/python3 -m venv/python3 -m venv --without-pip/' /${RTKBASE_PATH}/rtkbase/scripts/install.sh && \
     sh ./install_script.sh -1 && \
-    python3 -m venv /${RTKBASE_PATH}/venv && \
-    /${RTKBASE_PATH}/venv/bin/pip install -r /${RTKBASE_PATH}/rtkbase/web_app/requirements.txt && \
     # Clean up
     rm -rf /tmp/*
 
