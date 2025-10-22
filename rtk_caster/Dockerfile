@@ -14,7 +14,7 @@ RUN apk add --no-cache \
     avahi-tools \
     avahi \
     util-linux \
-    ntpdate \
+    openntpd \
     curl \
     wget \
     tar \
@@ -23,7 +23,6 @@ RUN apk add --no-cache \
     patch \
     python3 \
     py3-pip \
-    py3-venv \
     xz
 
 # Add s6-overlay
@@ -41,13 +40,13 @@ RUN \
     tar -C / -Jxpf /tmp/s6-overlay.tar.xz
 
 # Copy the application code
-COPY ELT_RTKBase /${RTKBASE_PATH}/ELT_RTKBase
+COPY ELT_RTKBase /${RTKBASE_PATH}/rtkbase
 
 # Set up the application
 RUN adduser -D -h ${RTKBASE_PATH} -s /sbin/nologin ${RTKBASE_USER} && \
     mkdir -p ${RTKBASE_PATH} && \
     chown -R ${RTKBASE_USER}:${RTKBASE_USER} ${RTKBASE_PATH} && \
-    cd /${RTKBASE_PATH}/ELT_RTKBase/Install && \
+    cd /${RTKBASE_PATH}/rtkbase/Install && \
     sed -i 's/python3 -m venv/python3 -m venv --without-pip/' /${RTKBASE_PATH}/rtkbase/scripts/install.sh && \
     sh ./install_script.sh -1 && \
     python3 -m venv /${RTKBASE_PATH}/venv && \
