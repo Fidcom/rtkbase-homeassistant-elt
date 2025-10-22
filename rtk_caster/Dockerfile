@@ -3,10 +3,11 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Set up environment variables
-ENV LANG C.UTF-8
-ENV RTKBASE_USER rtkbase
-ENV RTKBASE_PATH /usr/local/${RTKBASE_USER}
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
+ENV LANG=C.UTF-8
+ENV RTKBASE_USER=rtkbase
+ENV RTKBASE_PATH=/usr/local/${RTKBASE_USER}
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+ARG S6_OVERLAY_VERSION=v3.1.6.0
 
 # Install dependencies
 RUN apt-get update && \
@@ -28,9 +29,10 @@ RUN apt-get update && \
 
 # Add s6-overlay
 ARG BUILD_ARCH
-ADD "https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-${BUILD_ARCH}.tar.gz" /tmp/
-RUN tar xfz /tmp/s6-overlay-${BUILD_ARCH}.tar.gz -C / --exclude="./bin" && \
-    tar xfz /tmp/s6-overlay-${BUILD_ARCH}.tar.gz -C /usr ./bin
+ADD "https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz" /tmp/
+ADD "https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-${BUILD_ARCH}.tar.xz" /tmp/
+RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz && \
+    tar -C / -Jxpf /tmp/s6-overlay-${BUILD_ARCH}.tar.xz
 
 # Copy the application code
 COPY ELT_RTKBase /${RTKBASE_PATH}/ELT_RTKBase

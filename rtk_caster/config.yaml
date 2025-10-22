@@ -5,6 +5,7 @@ description: "RTK Caster add-on for Home Assistant, based on ELT_RTKBase."
 arch:
   - "aarch64"
   - "armv7"
+  - "amd64"
 init: true
 map:
   - "config:rw"
