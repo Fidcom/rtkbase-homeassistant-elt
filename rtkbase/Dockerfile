@@ -4,9 +4,12 @@ FROM ${BUILD_FROM}
 ARG BUILD_VERSION
 ARG BUILD_ARCH
 
-RUN apk add --no-cache curl \
+RUN apk add --no-cache curl xz \
+    && S6_ARCH="${BUILD_ARCH}" \
+    && if [ "${BUILD_ARCH}" = "amd64" ]; then S6_ARCH="x86_64"; fi \
+    && if [ "${BUILD_ARCH}" = "armv7" ]; then S6_ARCH="armhf"; fi \
     && curl -L -s "https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-noarch.tar.xz" | tar -C / -Jxpf - \
-    && curl -L -s "https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-${BUILD_ARCH}.tar.xz" | tar -C / -Jxpf -
+    && curl -L -s "https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-${S6_ARCH}.tar.xz" | tar -C / -Jxpf -
 
 HEALTHCHECK CMD s6-overlay-suexec -g nobody -f nobody /command/s6-healthcheck -c /etc/s6-overlay/s6-rc.d -t 30000
 
