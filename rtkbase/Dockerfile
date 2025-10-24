@@ -20,7 +20,7 @@ RUN apk add --no-cache \
     python3-dev \
     py3-setuptools \
     py3-wheel \
-    py3-serial \
+    py3-pyserial \
     eudev-dev \
     bc \
     dos2unix \
