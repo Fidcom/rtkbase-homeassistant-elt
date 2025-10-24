@@ -42,7 +42,7 @@ RUN git clone https://github.com/GNSSOEM/ELT_RTKBase.git /usr/local/rtkbase/rtkb
     && /usr/local/rtkbase/venv/bin/pip install --upgrade pip setuptools wheel \
     && /usr/local/rtkbase/venv/bin/pip install -r /usr/local/rtkbase/rtkbase/web_app/requirements.txt
 
-COPY ELT_RTKBase/settings.conf.default /usr/local/rtkbase/rtkbase/settings.conf
+COPY settings.conf.default /usr/local/rtkbase/rtkbase/settings.conf
 
 RUN wget -qO - https://github.com/rtklibexplorer/RTKLIB/archive/refs/tags/b34j.tar.gz | tar -xvz \
     && make --directory=RTKLIB-b34j/app/consapp/str2str/gcc \
