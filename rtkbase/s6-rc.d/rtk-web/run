@@ -1,0 +1,3 @@
+#!/command/with-contenv bashio
+
+exec /usr/local/rtkbase/venv/bin/python3 /usr/local/rtkbase/rtkbase/web_app/server.py

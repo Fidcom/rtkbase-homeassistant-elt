@@ -1,0 +1,26 @@
+name: "RTKBase Caster"
+version: "0.1.0"
+slug: "rtkbase_caster"
+description: "A Home Assistant add-on for RTKBase, providing an NTRIP caster and web interface."
+arch:
+  - amd64
+  - aarch64
+  - armv7
+ports:
+  8099/tcp: 8099
+  2101/tcp: 2101
+ports_description:
+  8099/tcp: "RTKBase Web Interface"
+  2101/tcp: "NTRIP Caster"
+options:
+  gnss_tcp_host: "192.168.1.248"
+  gnss_tcp_port: 5015
+  caster_mountpoint: "RTKBASE"
+  caster_user: "user"
+  caster_password: "password"
+schema:
+  gnss_tcp_host: "str"
+  gnss_tcp_port: "port"
+  caster_mountpoint: "str"
+  caster_user: "str"
+  caster_password: "password"
