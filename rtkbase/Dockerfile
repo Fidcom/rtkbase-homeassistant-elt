@@ -42,8 +42,11 @@ RUN apk add --no-cache \
 
 RUN git clone https://github.com/GNSSOEM/ELT_RTKBase.git /usr/local/rtkbase/rtkbase \
     && python3 -m venv /usr/local/rtkbase/venv \
-    && /usr/local/rtkbase/venv/bin/pip install --upgrade pip setuptools wheel \
-    && /usr/local/rtkbase/venv/bin/pip install -r /usr/local/rtkbase/rtkbase/web_app/requirements.txt
+    && /usr/local/rtkbase/venv/bin/pip install --upgrade pip setuptools wheel
+
+COPY requirements.txt /usr/local/rtkbase/rtkbase/web_app/requirements.txt
+
+RUN /usr/local/rtkbase/venv/bin/pip install -r /usr/local/rtkbase/rtkbase/web_app/requirements.txt
 
 COPY settings.conf.default /usr/local/rtkbase/rtkbase/settings.conf
 
