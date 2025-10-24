@@ -1,5 +1,0 @@
-#!/usr/bin/execlineb -P
-
-s6-svwait -d -t 5000 \
-/var/run/s6/services/ntrip_caster
-s6-svc -d /var/run/s6/services/ntrip_caster
